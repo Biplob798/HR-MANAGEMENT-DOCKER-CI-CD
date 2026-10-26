@@ -1,0 +1,15 @@
+# Secrets: never commit real passwords
+.env
+
+# Node.js
+node_modules/
+npm-debug.log*
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

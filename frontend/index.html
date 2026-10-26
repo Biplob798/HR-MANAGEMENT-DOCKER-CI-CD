@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HR Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>HR Management</h1>
+    <button id="addBtn" class="btn primary">+ Add Employee</button>
+  </header>
+
+  <section class="toolbar">
+    <input id="search" type="search" placeholder="Search by name or email...">
+    <label>Rows per page
+      <select id="pageSize">
+        <option>5</option>
+        <option selected>10</option>
+        <option>25</option>
+        <option>50</option>
+      </select>
+    </label>
+  </section>
+
+  <p id="status">Loading...</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Hire date</th>
+          <th>Job</th><th>Salary</th><th>Department</th><th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+
+  <div id="pager" class="pager"></div>
+
+  <!-- Add / Edit popup -->
+  <dialog id="dlg">
+    <form id="empForm">
+      <h2 id="dlgTitle">Add Employee</h2>
+      <input type="hidden" id="employee_id">
+
+      <div class="grid">
+        <label>First name
+          <input id="first_name" maxlength="20">
+        </label>
+        <label>Last name *
+          <input id="last_name" maxlength="25" required>
+        </label>
+        <label>Email *
+          <input id="email" type="text" maxlength="25" required placeholder="e.g. JSMITH">
+        </label>
+        <label>Phone
+          <input id="phone_number" maxlength="20">
+        </label>
+        <label>Hire date *
+          <input id="hire_date" type="date" required>
+        </label>
+        <label>Job *
+          <select id="job_id" required></select>
+        </label>
+        <label>Salary
+          <input id="salary" type="number" min="0" step="0.01">
+        </label>
+        <label>Department
+          <select id="department_id"></select>
+        </label>
+      </div>
+
+      <p id="formError" class="error"></p>
+
+      <div class="actions">
+        <button type="button" id="cancelBtn" class="btn">Cancel</button>
+        <button type="submit" class="btn primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+* { box-sizing: border-box; }
+body { font-family: Arial, sans-serif; margin: 0; padding: 2rem; background: #f5f6fa; color: #2d3436; }
+
+header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+h1 { margin: 0; }
+
+.toolbar { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-bottom: .5rem; }
+.toolbar input[type=search] { flex: 1; min-width: 220px; }
+input, select { padding: 8px 10px; border: 1px solid #b2bec3; border-radius: 6px; font-size: 14px; width: 100%; }
+.toolbar select { width: auto; }
+.toolbar label { display: flex; align-items: center; gap: 6px; font-size: 14px; }
+
+.btn { padding: 8px 16px; border: 1px solid #b2bec3; border-radius: 6px; background: #fff; cursor: pointer; font-size: 14px; }
+.btn:hover:not(:disabled) { background: #dfe6e9; }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn.primary { background: #0984e3; border-color: #0984e3; color: #fff; }
+.btn.primary:hover:not(:disabled) { background: #0873c4; }
+.btn.small { padding: 4px 10px; font-size: 13px; }
+
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; background: #fff; border-radius: 8px; overflow: hidden; }
+th, td { padding: 10px 12px; border-bottom: 1px solid #eee; text-align: left; font-size: 14px; white-space: nowrap; }
+th { background: #0984e3; color: #fff; }
+tr:hover td { background: #f1f2f6; }
+td.num { text-align: right; }
+
+.pager { display: flex; gap: 6px; justify-content: center; align-items: center; margin: 1rem 0; flex-wrap: wrap; }
+.pager .btn.active { background: #0984e3; color: #fff; border-color: #0984e3; }
+
+dialog { border: none; border-radius: 10px; padding: 1.5rem; width: min(640px, 95vw); box-shadow: 0 10px 40px rgba(0,0,0,.3); }
+dialog::backdrop { background: rgba(0,0,0,.45); }
+dialog h2 { margin-top: 0; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.grid label { display: flex; flex-direction: column; gap: 4px; font-size: 13px; font-weight: bold; }
+.actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 1rem; }
+.error { color: #d63031; min-height: 1.2em; margin: .75rem 0 0; font-size: 14px; }
+
+#toast { position: fixed; bottom: 20px; right: 20px; background: #00b894; color: #fff; padding: 12px 20px;
+         border-radius: 6px; opacity: 0; transition: opacity .3s; pointer-events: none; }
+#toast.show { opacity: 1; }
+
+@media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
