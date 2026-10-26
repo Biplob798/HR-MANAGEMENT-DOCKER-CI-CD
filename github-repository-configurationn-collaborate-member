@@ -1,0 +1,48 @@
+HR-MANAGEMENT-DOCKER-CI-CD
+
+
+
+1. Add the CODEOWNERS file (so only your approval counts)
+
+Create .github/CODEOWNERS with this line, then commit it:
+
+* @Biplob798
+
+2. Protect main
+
+Repo → Settings → Branches → Add branch protection rule
+Step 1: Click “Add classic branch protection rule”
+
+
+
+Step 2: Fill the form
+
+Branch name pattern: type main
+
+Then tick these boxes:
+
+Require a pull request before merging
+Required number of approvals before merging: 1
+Dismiss stale pull request approvals when new commits are pushed
+Require review from Code Owners (only works after you add the CODEOWNERS file below; if you haven’t added it yet, skip this one)
+Require status checks to pass before merging (if your build job isn’t listed in the search box yet, skip this for now and add it after the first pull request runs)
+
+
+Step 3: Click “Create” at the bottom
+
+Step 4: Add the CODEOWNERS file
+
+Go to your repo’s Code tab → Add file → Create new file. In the name box type:
+
+.github/CODEOWNERS
+
+(Typing the slashes creates the folder.) Put this one line in the file:
+
+* @Biplob798
+
+Then commit it. Because you are the owner and didn’t tick “Do not allow bypassing,” this commit goes straight to main.
+
+After that, go back and tick Require review from Code Owners in the rule if you skipped it.
+
+
+Step 5: Test it
