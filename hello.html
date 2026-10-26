@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello HTML - Table Sorting</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f6f9;
+            color: #333;
+        }
+
+        h2 {
+            color: #2c3e50;
+        }
+
+        p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background-color: #2c3e50;
+            color: #ffffff;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }
+
+        th:hover {
+            background-color: #34495e;
+        }
+
+        th::after {
+            content: ' \25B2\25BC';
+            font-size: 10px;
+            color: #888;
+            margin-left: 5px;
+        }
+
+        th.asc::after {
+            content: ' \25B2';
+            color: #fff;
+        }
+
+        th.desc::after {
+            content: ' \25BC';
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f5f9;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Hello, Table Sorting!</h2>
+    <p>Click on any table header column to sort the table ascending or descending.</p>
+
+    <table id="sortableTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0, 'number')">ID</th>
+                <th onclick="sortTable(1, 'string')">Name</th>
+                <th onclick="sortTable(2, 'string')">Role</th>
+                <th onclick="sortTable(3, 'number')">Salary ($)</th>
+                <th onclick="sortTable(4, 'date')">Join Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>103</td>
+                <td>Alice Smith</td>
+                <td>Developer</td>
+                <td>85000</td>
+                <td>2021-05-14</td>
+            </tr>
+            <tr>
+                <td>101</td>
+                <td>Bob Johnson</td>
+                <td>Manager</td>
+                <td>95000</td>
+                <td>2019-11-01</td>
+            </tr>
+            <tr>
+                <td>104</td>
+                <td>Charlie Brown</td>
+                <td>Designer</td>
+                <td>72000</td>
+                <td>2022-01-20</td>
+            </tr>
+            <tr>
+                <td>102</td>
+                <td>Diana Prince</td>
+                <td>Analyst</td>
+                <td>68000</td>
+                <td>2020-08-10</td>
+            </tr>
+            <tr>
+                <td>105</td>
+                <td>Edward Elric</td>
+                <td>Architect</td>
+                <td>110000</td>
+                <td>2018-03-15</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function sortTable(columnIndex, type) {
+            const table = document.getElementById("sortableTable");
+            const tbody = table.querySelector("tbody");
+            const rows = Array.from(tbody.querySelectorAll("tr"));
+            const th = table.querySelectorAll("th")[columnIndex];
+            
+            // Determine current sort direction
+            const isAscending = !th.classList.contains("asc");
+
+            // Clear sort indicators from all headers
+            table.querySelectorAll("th").forEach(header => {
+                header.classList.remove("asc", "desc");
+            });
+
+            // Set current header sort state
+            th.classList.add(isAscending ? "asc" : "desc");
+
+            // Sort rows
+            rows.sort((rowA, rowB) => {
+                let cellA = rowA.children[columnIndex].innerText.trim();
+                let cellB = rowB.children[columnIndex].innerText.trim();
+
+                if (type === 'number') {
+                    cellA = parseFloat(cellA) || 0;
+                    cellB = parseFloat(cellB) || 0;
+                } else if (type === 'date') {
+                    cellA = new Date(cellA);
+                    cellB = new Date(cellB);
+                } else {
+                    cellA = cellA.toLowerCase();
+                    cellB = cellB.toLowerCase();
+                }
+
+                if (cellA < cellB) return isAscending ? -1 : 1;
+                if (cellA > cellB) return isAscending ? 1 : -1;
+                return 0;
+            });
+
+            // Re-insert sorted rows into the table body
+            tbody.innerHTML = "";
+            rows.forEach(row => tbody.appendChild(row));
+        }
+    </script>
+
+</body>
+</html>
